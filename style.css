@@ -1,0 +1,666 @@
+@font-face {
+		    font-family: 'icon';
+		    src: url('ll_recor-webfont.eot');
+		    src: url('ll_recor-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('ll_recor-webfont.woff') format('woff'),
+		         url('ll_recor-webfont.ttf') format('truetype'),
+		         url('ll_recor-webfont.svg#ll_recordregular') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		
+		}
+		body{
+			margin:0;
+		}
+		.playerHead{
+			position:absolute;
+			height:100%;
+			width:200px;
+			background-color:rgba(0,0,0,0.75);
+			border-right:solid;
+			border-width: 2px;
+			border-color:white;
+			z-index:7000;
+		}
+			#trackA{
+				width:4000px;
+				height:80px;
+				position:relative;
+				margin-left:5px;
+				top:10px;
+				left:200px;
+				
+				
+			}
+			#track_container{
+				position:relative;
+				width:400px;
+				height:100px;
+				overflow-x: hidden;
+				background:url('img/trackbackground.png');
+				background-repeat:no-repeat;
+			}
+			#trackB{
+				width:4000px;
+				height:80px;
+				position:relative;
+				margin-left:5px;
+				top:10px;
+				left:200px;
+			}
+			#track_container2{
+				position:relative;
+				width:400px;
+				height:100px;
+				overflow-x: hidden;
+				background:url('img/trackbackground.png');
+				background-repeat:no-repeat;
+			}
+			.playerContainer{
+				width:400px;
+				position:relative;
+				height:100%;
+				background-color:#a1a1a1;
+				display:inline-block;
+				float:left;
+			}
+			#C1{
+				
+			}
+			#C2{
+				
+			}
+			.BPMView{
+				position:absolute;
+				z-index:888;
+				color:rgba(255,255,255,0.6);
+				top:3px;
+				z-index:7040;
+				margin:0;
+				left:5px;
+				font-family: 'Press Start 2P', cursive;
+			}
+			.button{
+				color:black;
+				position:relative;
+				font-family: 'icon';
+				font-size:80px;
+				padding:0px;
+				margin:0px;
+				height:85px;
+				width:85px;
+				overflow:hidden;
+				border:none;
+				line-height: 5px;
+			}
+			.SongTitle{
+				font-family: 'Press Start 2P', cursive;
+				font-size:10px;
+				margin-top:0px;
+				width:400px;
+				color:white;
+				height:25px;
+				background-color:black;
+				text-align: center;
+				padding-top:3px;
+				overflow:hidden;
+			}
+			#MixSection{
+			/*make a fix for ipad atleast later.*/
+				width:400px;
+				height:100%;
+				background-color:#a1a1a1;
+				position:relative;
+				display:inline-block;
+				float:left;
+				border-right: solid;
+				border-left: solid;
+				overflow:hidden;
+			}
+			.wrapper{
+				width:1206px;
+				height:600px;
+				position:relative;
+				left:50%;
+				margin-left:-600px;
+				top:10px;
+				border:solid;
+				-webkit-border-radius: 10px;
+				overflow: hidden;
+			}
+			#SC{
+				position:relative;
+				width:200px;
+				left:50%;
+				margin-left:-100px;
+				margin-top:-70px;
+				z-index:400;
+			}
+			.logo{
+				font-family: sans-serif;
+				color:white;
+				text-align: center;
+				font-size:30px;
+				position:relative;
+				margin-top:-6px;
+				word-spacing:10px;
+			}
+			#mix_container{
+				position:relative;
+				width:100%;
+				height:100%;
+				box-shadow: 0px -57px 57px 0px #fff;
+			}
+			.VolumeFaderContainer{
+				position:relative;
+				background-color:#333333;
+				width:40px;
+				height:220px;
+				border-radius: 5px;
+				padding-top:5px;
+				padding-bottom:5px;
+				-moz-box-shadow:    inset 0 0 10px #000000;
+			   -webkit-box-shadow: inset 0 0 10px #000000;
+			   box-shadow:         inset 0 0 10px #000000;
+			}
+			.XFaderContainer{
+				position:relative;
+				background-color:#333333;
+				width:280px;
+				height:30px;
+				border-radius: 5px;
+				padding-top:5px;
+				padding-right:5px;
+				padding-bottom:5px;
+				left:50%;
+				margin-left:-140px;
+				-moz-box-shadow:    inset 0 0 10px #000000;
+			   -webkit-box-shadow: inset 0 0 10px #000000;
+			   box-shadow:         inset 0 0 10px #000000;
+			   margin-top:55px;
+			}
+			.sliderX{
+				position:relative;
+				background: rgb(161,161,161);
+				background: -moz-linear-gradient(top,  rgba(161,161,161,1) 0%, rgba(117,117,117,1) 25%, rgba(117,117,117,1) 35%, rgba(122,122,122,1) 50%, rgba(117,117,117,1) 65%, rgba(117,117,117,1) 75%, rgba(161,161,161,1) 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(161,161,161,1)), color-stop(25%,rgba(117,117,117,1)), color-stop(35%,rgba(117,117,117,1)), color-stop(50%,rgba(122,122,122,1)), color-stop(65%,rgba(117,117,117,1)), color-stop(75%,rgba(117,117,117,1)), color-stop(100%,rgba(161,161,161,1)));
+				background: -webkit-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: -o-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: -ms-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: linear-gradient(to bottom,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1a1a1', endColorstr='#a1a1a1',GradientType=0 );
+				left:118px;
+				width:40px;
+				height:30px;
+				margin-left:5px;
+				border-radius: 5px;
+			}
+			.slider{
+				position:relative;
+				background: rgb(161,161,161);
+				background: -moz-linear-gradient(top,  rgba(161,161,161,1) 0%, rgba(117,117,117,1) 25%, rgba(117,117,117,1) 35%, rgba(122,122,122,1) 50%, rgba(117,117,117,1) 65%, rgba(117,117,117,1) 75%, rgba(161,161,161,1) 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(161,161,161,1)), color-stop(25%,rgba(117,117,117,1)), color-stop(35%,rgba(117,117,117,1)), color-stop(50%,rgba(122,122,122,1)), color-stop(65%,rgba(117,117,117,1)), color-stop(75%,rgba(117,117,117,1)), color-stop(100%,rgba(161,161,161,1)));
+				background: -webkit-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: -o-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: -ms-linear-gradient(top,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				background: linear-gradient(to bottom,  rgba(161,161,161,1) 0%,rgba(117,117,117,1) 25%,rgba(117,117,117,1) 35%,rgba(122,122,122,1) 50%,rgba(117,117,117,1) 65%,rgba(117,117,117,1) 75%,rgba(161,161,161,1) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a1a1a1', endColorstr='#a1a1a1',GradientType=0 );
+
+				width:30px;
+				height:40px;
+				margin-left:5px;
+				border-radius: 5px;
+			}
+			#sectionA{
+				width:200px;
+				height:240px;
+				float:left;
+			}
+			#sectionB{
+				width:200px;
+				height:240px;
+				float:right;
+				
+			}
+			#sectionA .VolumeFaderContainer{
+				float:right;
+				margin-right:45px;
+			}
+			#sectionB .VolumeFaderContainer{
+				float:left;
+				margin-left:45px;
+			}
+			.centerIt{
+				position:relative;
+				left:50%;
+				margin-left:-138px;
+				top:100px;
+				width:276px;
+				height:276px;
+				border-radius:135px;
+				background: rgb(51,51,51);
+				background: -moz-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 1%, rgba(161,161,161,1) 65%, rgba(161,161,161,1) 100%);
+				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,rgba(51,51,51,1)), color-stop(65%,rgba(161,161,161,1)), color-stop(100%,rgba(161,161,161,1)));
+				background: -webkit-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 1%,rgba(161,161,161,1) 65%,rgba(161,161,161,1) 100%);
+				background: -o-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 1%,rgba(161,161,161,1) 65%,rgba(161,161,161,1) 100%);
+				background: -ms-radial-gradient(center, ellipse cover,  rgba(51,51,51,1) 1%,rgba(161,161,161,1) 65%,rgba(161,161,161,1) 100%);
+				background: radial-gradient(ellipse at center,  rgba(51,51,51,1) 1%,rgba(161,161,161,1) 65%,rgba(161,161,161,1) 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#a1a1a1',GradientType=1 );
+
+			}
+			.infospace{
+				position:relative;
+				height:40px;
+				border-bottom:solid;
+				clear:both;
+				width:100%;
+				margin-bottom:15px;
+				background-color:#000;
+				
+			}
+			.infospace p{
+				position:relative;
+				display:inline-block;
+				float:left;
+				width:200px;
+				margin-top:10px;
+				color:#fff;
+				font-family: 'Press Start 2P', cursive;
+				text-align:center;
+			}
+			.EQknobs{
+				position:relative;
+				display:block;
+				clear:both;
+			}
+			.knobText{
+				position:relative;
+				display:block;
+				clear:both;
+				text-align: center;
+				margin-bottom:5px;
+				font-family:sans-serif;
+				color:#333;
+			}
+			.EqSection{
+				float:left;
+				margin-left:30px;
+			}
+			.EqSectionflipped{
+				float:right;
+				margin-right:30px;
+			}
+			#MIDIinterface{
+				width:360px;
+				position:relative;
+				left:50%;
+				margin-left:-180px;
+				height:100px;
+				background-color:black;
+				border-radius: 15px;
+				clear:both;
+			}
+			#MIDIinterface p{
+				position:relative;
+				text-align: center;
+				font-family:'Press Start 2P', cursive;
+				color:white;
+				top:5px;
+			}
+			.centerIt canvas{
+				position:relative;
+				left:3px;
+				top:3px;
+			}
+			/*LOAD NEW TRACKS*/
+			.LoadNewTrackA{
+				background-color:#333;
+				position:absolute;
+				width:70px;
+				height:70px;
+				border-top-left-radius:10px;
+				border-bottom-left-radius:10px;
+				border-top-right-radius:10px;
+				top:290px;
+				left:65px;
+			}
+			.LoadNewTrackA div{
+				position:relative;
+				z-index:8888;
+				color:#A1A1A1;
+				width:40px;
+				height:40px;
+			}
+			.LoadNewTrackA div:hover{
+				color:#000;	
+			}
+			.LoadNewTrackA div span{
+				position:relative;
+				font-size:25px;
+				left:12px;
+				top:5px;
+				pointer:pointer;
+			}
+			
+		/*SEACH FUNCTION STYLE*/
+		.seachContainer{
+			position:absolute;
+			width:100%;
+			height:470px;
+			background-color:rgba(0,0,0,0.92);
+			top:600px;
+			color:white;
+		/*FADED UP IS 140px;*/
+			z-index:9809;
+			
+		}
+		.seachContainer p{
+			margin-left:5px;
+			margin-top:5px;
+		}
+		.powered{
+			position: absolute; 
+			bottom: 0; 
+			right: 0; 
+			border: 0;
+		}
+		#CloseSearch
+		{
+			position: absolute; 
+			width:54px;
+			height:20px;
+			top: 0; 
+			right: 0; 
+			border: 0;
+			cursor:pointer;
+		}
+		.searchfeild{
+			position:relative;
+			float:left;
+			width:320px;
+			border-right: solid;
+			border-color:white;
+			height: 100%;
+		}
+		.fullWidth{
+			width:100%;
+		}
+		#SearchResults{
+			position:relative;
+			width:775px;
+			height:470px;
+			float:left;
+			border-right:solid;
+			border-color:white;
+			overflow-x:scroll;
+		}
+	/* SEACH OBJECYS STYLE*/
+		.seachObjectContainer{
+			border-bottom: solid;
+			max-height:100px;
+			width:100%;
+			border-color:#333;
+			overflow: hidden;
+			
+		}
+		.seachObjectContainer div{
+			position:relative;
+			width:100%;
+			height:105px;
+			top:-5px;
+			background-color:rgba(0,0,0,0.9);
+			
+			
+		}
+		
+		.seachObjectContainer img{
+			position:relative;
+			float:left;
+			display:inline-block;
+			z-index:7000;
+		}
+		.seachObjectContainer p{
+			position:relative;
+			left:5px;
+			margin:0px;
+			top:10px;
+		
+		}
+		.objectBPM{
+			position:absolute;
+			top:10px;
+			right:0px;
+			z-index:9000;
+			color:#000;
+			background-color:#a1a1a1;
+			padding-left:5px;
+			padding-right:5px;
+		}
+		.objectGenre{
+			position:absolute;
+			bottom:10px;
+			right:0px;
+			z-index:9001;
+			color:#fff;
+			padding-left:5px;
+			padding-right:5px;
+		}
+		
+	/*ADVANCED EFFECTS*/
+	#CloseAdvancedFx
+		{
+			position: absolute; 
+			width:54px;
+			height:20px;
+			top: 0; 
+			right: 0; 
+			border: 0;
+			cursor:pointer;
+		}
+		.AdvancedFxContainer{
+			position:absolute;
+			width:100%;
+			height:470px;
+			background-color:rgba(0,0,0,0.92);
+			top:600px;
+			color:white;
+		/*FADED UP IS 140px;*/
+			z-index:9809;
+			
+		}
+		.bounderies
+		{
+			margin-left:5px;
+			width:395px;
+			overflow-x:hidden;
+			float:left;
+			height:220px;
+		}
+	/*Reverb*/
+		.ReverbFx{
+			color:#0befd5;
+		}
+		.ReverbFx div{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:18px;
+		}
+	/*Delay*/
+		.DelayFx{
+			color:#c5ef0b;
+			width:425px;
+		}
+		.DelaySpec{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:80px;
+		}
+		.DelaySpec2{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:0px;
+		}
+		.DelaySpec3{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:80px;
+			margin-left:80px;
+			position:relative;
+			top:-80px;
+		}
+		.DelaySpec4{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-left:0px;
+			position:relative;
+			top:-80px;
+		}
+	/*Chorus*/
+		.ChorusFx{
+			color:#ab0bef;
+			width:300px;
+		}
+		.ChorusFx div{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:18px;
+		}
+		.PhaserFx{
+			color:#0b44ef;
+			width:425px;
+		}
+	/*LoFi*/
+	.LoFiFx{
+			color:#ce0202;
+			
+		}
+		.LoFiFx div{
+			float:left;
+			width:80px;
+			text-align:center;
+			margin-right:49px;
+		}
+		
+	/*MIDI CONTAINER*/
+	
+	.MIDISetupContainer{
+			position:absolute;
+			width:100%;
+			height:470px;
+			background-color:rgba(0,0,0,0.92);
+			top:600px;
+			color:white;
+		/*FADED UP IS 140px;*/
+			z-index:9809;
+			
+	}
+	#CloseMIDISetup
+		{
+			position: absolute; 
+			width:54px;
+			height:20px;
+			top: 0; 
+			right: 0; 
+			border: 0;
+			cursor:pointer;
+		}
+		.MIDIListContainer{
+			position:relative;
+			width:592px;
+			height:30px;
+			float:left;
+			background-color:#333;
+			
+			
+		}
+		.MIDIListContainer div{
+			float:left;
+			color:#a1a1a1;
+			border-right:solid black;
+			text-align: center;
+			font-size:16px;	
+			line-height:1.8em;		
+		}
+		.MIDIPlace{
+			width:80px;
+		}
+		.MIDIEventName{
+			width:300px;
+		} 
+		.MIDIAssigned{
+			width:100px;
+		} 
+		.LearnFunction{
+			width:100px;
+		}
+		.NextLine
+		{
+			background-color:#1b1b1b;
+		}
+		.Listheader{
+			color:white;
+		}
+		.MIDIObjectsContainer{
+			height:470px;
+			overflow-x:scroll;
+		}
+		.spacer{
+			width:10px;
+		}
+		#ControlWindow{
+			position: absolute; 
+			width:180px;
+			top: 40px;
+			right: 100px; 
+			border: 0;
+			cursor:pointer;
+			background-color:#333333;
+			text-align:center;
+			padding-bottom:15px;
+		}
+		#ControlWindow p{
+			background-color:#000000;
+			color:white;
+		}
+		#ControlWindow div{
+			width:180px;
+			
+		}
+		.hidden{
+			visibility: hidden;
+		}
+		.blurdiv
+		{
+			position:fixed;
+			top:0px;
+			bottom:0px;
+			left:0px;
+			right:0px;
+			background-color:rgba(0, 0, 0, 0.9);
+			z-index: 8970;
+		}
+		.blurdiv .blurText
+		{
+			position:relative;
+			text-align: center;
+			color:white;
+			font-size:34px;
+			line-height:normal;
+			top:120px;
+		}
+		.blurdiv img{
+			position:relative;
+			left:50%;
+			width:1000px;
+			height:1000px;
+			margin-left:-500px;
+			opacity: 0.3;
+			top:-560px;
+		}
+		

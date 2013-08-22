@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>Soundcloud Mixer</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Anthony Dry" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+		<script src='http://cwilso.github.com/WebMIDIAPIShim/WebMIDIAPI.js'></script>
+		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Just+Another+Hand' rel='stylesheet' type='text/css'>
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery.knob.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+		<script src="http://waveformjs.org/waveform.js"></script>
+		<script src="//connect.soundcloud.com/sdk.js"></script>
+		<script src="js/soundcloud2.js"></script>
+		<script src="js/tuna.js"></script>
+		<script src="js/browserdetect.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<div class="playerContainer" id="C1">
+				<div id="track_container">
+					<p id="BPMTrackA"class="BPMView">BPM:</p>
+					<div class="playerHead"></div>
+					<div id="trackA"></div>
+				</div>
+				<p id="t1" class="SongTitle"></p>
+				<div style="margin-left:5px; margin-top:-8px; width:395px;" class="btn-toolbar">
+				  <div class="btn-group" style="width: 395px;">
+				    <a id="PlayTrack1" class="btn btn-large" href="#"><i class="icon-play"></i></a>
+				    <a id="StopTrack1" class="btn btn-large" href="#"><i class="icon-stop"></i></a>
+				 
+				    <a class="btn btn-large btn-success" data-toggle="button" disabled="disabled" style="height:21px;" href="#">cue</a>
+				    <a class="btn btn-large btn-success" disabled="disabled" href="#"><i class="icon-play"></i></a>
+				 
+					 <button class="btn btn-inverse btn-large" id="Fx1" style="height:45px; width: 125px;" data-toggle="button">Reverb</button>
+					  <button id="Fx1Select" class="btn dropdown-toggle dropdown btn-inverse btn-large" style="height:45px;" data-toggle="dropdown">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="effect1dropdown dropdown-menu pull-right">
+					    <!-- dropdown menu links -->
+					    <li><a tabindex="-1" href="#">Delay</a></li>
+					    <li><a tabindex="-1" href="#">Chorus</a></li>
+					    <li><a tabindex="-1" href="#">Phaser</a></li>
+					    <li><a tabindex="-1" href="#">LoFi</a></li>
+					    <li><a tabindex="-1" href="#">Reverb</a></li>
+					    <li class="divider"></li>
+					    <li><a tabindex="-1"  href="#">Advanced</a></li>
+					    
+					  </ul>
+				</div>
+					
+				</div>
+				<!-- Load New Track -->
+				<div class="LoadNewTrackA"><div  id="clickNewTrack1" class="clickNewTrackA"><span>+</span></div></div>
+				<!-- FIRST ATTEMPT AT KNOBS-->
+				<div class="centerIt">
+				<input id="jockA" type="text" value="0" class="infinite" data-width="270" data-height="270" data-cursor="true" data-thickness="0.1" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false"/>
+				</div>
+				
+			</div>
+			<div id="MixSection">
+				
+				<img id="SC" src="img/SoundCloud_logo.png" alt="Soundcloud logotype"/>
+				<p class="logo">M I X E R</p>
+				<div id="mix_container">
+					<div class="infospace">
+						<p>DECK A</p>
+						<p>DECK B</p>
+					</div>
+					<div id="sectionA">
+						<div class="EqSection">
+							<span class="knobText">High</span>
+							<input id="Eq_A_H" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+							
+							<span class="knobText">Mid</span>
+							<input id="Eq_A_M" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+							
+							<span class="knobText">Low</span>
+							<input id="Eq_A_L" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+						</div>
+						<div class="VolumeFaderContainer">
+							<div id="sliderA" class="slider"></div>
+						</div>
+					</div>
+					<div id="sectionB">
+						<div class="EqSectionflipped">
+							<span class="knobText">High</span>
+							<input id="Eq_B_H" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+							
+							<span class="knobText">Mid</span>
+							<input id="Eq_B_M" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+							
+							<span class="knobText">Low</span>
+							<input id="Eq_B_L" class="cursor EQknobs" value="0" data-width="50" data-height="50" data-cursor="true" data-thickness=".3" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false" data-angleOffset="-125" data-angleArc="250" />
+						</div>
+						<div class="VolumeFaderContainer">
+							<div id="sliderB" class="slider"></div>
+						</div>
+					</div>
+					<div id="Mixbottom">
+						
+							<a id="OpenMIDISetup" style="position:relative; width:100px; left:50%;margin-top:30px; margin-left:-70px;" class="btn btn-large btn-inverse" href="#">MIDI Setup</a>
+						
+						<div class="XFaderContainer">
+							<div id="sliderC" class="sliderX"></div>
+						</div>
+					</div>
+					<p class="by" style="position: relative; text-align:center; top:25px;">By: Anthony Dry</p>
+				</div>
+				
+			</div>
+			<div class="playerContainer" id="C2">
+				<div id="track_container2">
+					<p id="BPMTrackB" class="BPMView">BPM:</p>
+					<div class="playerHead"></div>
+					<div id="trackB"></div>
+				</div>
+				<p id="t2" class="SongTitle"></p>
+				<div style="margin-left:5px; margin-top:-8px; width:395px;" class="btn-toolbar">
+				  <div class="btn-group" style="width: 395px;">
+				    <a id="PlayTrack2" class="btn btn-large" href="#"><i class="icon-play"></i></a>
+				    <a id="StopTrack2" class="btn btn-large" href="#"><i class="icon-stop"></i></a>
+				 
+				    <a class="btn btn-large btn-success" data-toggle="button" disabled="disabled" style="height:21px;" href="#">cue</a>
+				    <a class="btn btn-large btn-success" disabled="disabled" href="#"><i class="icon-play"></i></a>
+				 	<button class="btn btn-inverse btn-large" id="Fx2" style="height:45px; width: 125px;" data-toggle="button">Reverb</button>
+					  <button id="Fx2Select" class="btn dropdown-toggle dropdown btn-inverse btn-large" style="height:45px;" data-toggle="dropdown">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="effect2dropdown dropdown-menu pull-right">
+					    <!-- dropdown menu links -->
+					    <li><a tabindex="-1" href="#">Delay</a></li>
+					    <li><a tabindex="-1" href="#">Chorus</a></li>
+					    <li><a tabindex="-1" href="#">Phaser</a></li>
+					    <li><a tabindex="-1" href="#">LoFi</a></li>
+					    <li><a tabindex="-1" href="#">Reverb</a></li>
+					    <li class="divider"></li>
+					    <li><a tabindex="-1"  href="#">Advanced</a></li>
+					    
+					  </ul>
+					  
+					</div>
+				</div>
+				<!-- Load New Track -->
+				<div class="LoadNewTrackA"><div id="clickNewTrack2" class="clickNewTrackA"><span>+</span></div></div>
+				<div class="centerIt">
+				<input id="jockB" type="text" value="300" class="infinite" data-width="270" data-height="270" data-cursor="true" data-thickness="0.1" data-fgColor="#ff6600" data-bgColor="#000000" data-displayInput="false"/>
+				</div>
+			</div>
+			<!-- theSeachContainer and its proparties -->
+			<div class="seachContainer">
+				<div class="searchfeild">
+				<p>Soundcloud Search:</p>
+					<div class="input-append">
+					  <input id="seachQuery" class="span2" id="appendedInputButton" style="width:95%;" type="text">
+					  <button id="searchButton" class="btn btn-inverse" type="button">Search</button>
+					</div>
+					<p>Specify genres:</p>
+					<div class="btn-group btn-group-vertical genreTable" style="width:100%; height:250px; left:3px; position:relative; overflow-x: scroll;">
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Acid</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Chill Out</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Deep House</button >
+					  <button  type="button" data-toggle="button"  style="width:95%;" class="btn btn-inverse btn-small">Drum and Bass</button >
+					  <button type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Dubstep</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Electro House</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Electronica</button >
+					  <button type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Funk</button >
+					  <button  type="button" data-toggle="button"style="width:95%;" class="btn btn-inverse btn-small">Glitch Hop</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Hard Dance</button >
+					 <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Hiphop</button >
+					  <button type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">House</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Pop</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Progressive House</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Psy Trance</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Punk</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Reggae</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Rock</button >
+					  <button  type="button" data-toggle="button"  style="width:95%;"class="btn btn-inverse btn-small">Techno</button >
+					  <button  type="button" data-toggle="button" style="width:95%;" class="btn btn-inverse btn-small">Trance</button >
+					 </div>
+					 <p>Soundcloud URL:</p>
+					<div class="input-append">
+					  <input id="customLinkText" class="span2" id="appendInputButton" style="width:100%;" type="text">
+					  <button id="customLinkButton" class="btn btn-inverse" type="button">Load</button>
+					</div>
+						<div class="btn-group customLinkDeck" data-toggle="buttons-radio" style="position:relative; left:3px;">
+							<button class="btn btn-inverse">Deck A</button>
+							<button class="btn btn-inverse">Deck B</button>
+						</div>
+				</div>
+				<div id="SearchResults">
+					
+				</div>
+				<div id="CloseSearch">Close <i class="icon-remove icon-white"></i> </div>
+				<img class="powered" src="img/poweredbysoundclouad.png" alt="powered by soundcloud" />
+			</div>
+			<div class="AdvancedFxContainer">
+				<div id="CloseAdvancedFx">Close <i class="icon-remove icon-white"></i> </div>
+				<div class="AdvancedFxHeader" style="width:1200px;">Advaneced Effects</div>
+				<div class="ReverbFx bounderies">
+					<h3>Reverb</h3>
+					<div>
+						<input id="ReverbKnob1" value="22050" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0befd5" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>High Cut</p>
+					</div>
+					<div>
+						<input id="ReverbKnob2" value="200" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0befd5" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Low Cut</p>
+					</div>
+					<div>
+						<input id="ReverbKnob3" value="30" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0befd5" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Dry Amount</p>
+					</div>
+					<div>
+						<input id="ReverbKnob4" value="200" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0befd5" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Wet Amount</p>
+					</div>
+				
+					<div id="reverbOption" class="btn-group"  data-toggle="buttons-radio">
+					  <button type="button" style="width:77px;" class="btn btn-inverse">Room</button>
+					  <button type="button" style="width:77px;" class="btn btn-inverse">Plate</button>
+					  <button type="button" style="width:77px;" class="btn btn-inverse">Hall</button>
+					  <button type="button" style="width:77px;" class="btn btn-inverse">Church</button>
+					  <button type="button" style="width:77px;" class="btn btn-inverse">Orginal</button>
+					</div>
+				</div>
+				<div class="DelayFx bounderies">
+					<h3>Delay</h3>
+					<div class="DelaySpec">
+						<input id="DelayKnob1" value="75" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#c5ef0b" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Feedback</p>
+					</div>
+					<div class="DelaySpec">
+						<input id="DelayKnob2" value="500" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#c5ef0b" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Delay time</p>
+					</div>
+					<div class="DelaySpec2">
+						<input id="DelayKnob3" value="100" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#c5ef0b" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Dry Amount</p>
+					</div>
+					<div class="DelaySpec3">
+						<input id="DelayKnob4" value="95" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#c5ef0b" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Wet Amount</p>
+					</div>
+					<div class="DelaySpec4">
+						<input id="DelayKnob5" value="5000" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#c5ef0b" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Cutoff</p>
+					</div>
+				</div>
+				<div class="ChorusFx bounderies">
+					<h3>Chorus</h3>
+					<div>
+						<input id="ChorusKnob1" value="5" data-width="80"  data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ab0bef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Rate</p>
+					</div>
+					<div>
+						<input id="ChorusKnob2" value="100" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ab0bef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Delay time</p>
+					</div>
+					<div>
+						<input id="ChorusKnob3" value="80" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ab0bef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Feedback</p>
+					</div>
+				</div>
+				<div class="PhaserFx bounderies">
+					<h3>Phaser</h3>
+					<div class="DelaySpec">
+						<input id="PhaserKnob1" value="12" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0b44ef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Rate</p>
+					</div>
+					<div class="DelaySpec">
+						<input id="PhaserKnob2" value="80" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0b44ef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Depth</p>
+					</div>
+					<div class="DelaySpec2">
+						<input id="PhaserKnob3" value="90" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0b44ef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Feedback</p>
+					</div>
+					<div class="DelaySpec3">
+						<input id="PhaserKnob4" value="180" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0b44ef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Stereo</p>
+					</div>
+					<div class="DelaySpec4">
+						<input id="PhaserKnob5" value="700" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#0b44ef" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Mod Freq</p>
+					</div>
+				</div>
+				<div class="LoFiFx bounderies">
+					<h3>LoFi / Distortion</h3>
+					<div>
+						<input id="LoFiKnob1" value="100" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ce0202" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Gain</p>
+					</div>
+					<div>
+						<input id="LoFiKnob2" value="80" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ce0202" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Drive</p>
+					</div>
+					<div>
+						<input id="LoFiKnob3" value="100" data-width="80" data-height="80" data-cursor="false" data-thickness=".3" data-fgColor="#ce0202" data-bgColor="#333333" data-displayInput="true" data-angleOffset="-125" data-angleArc="250" />
+						<p>Curve</p>
+					</div>
+					
+					<div id="distOptions" class="btn-group"  data-toggle="buttons-radio">
+					  <button type="button" style="width:70px;" class="btn btn-inverse">Dist 1</button>
+					  <button type="button" style="width:70px;" class="btn btn-inverse">Dist 2</button>
+					  <button type="button" style="width:70px;" class="btn btn-inverse">Dist 3</button>
+					  <button type="button" style="width:70px;" class="btn btn-inverse">Dist 4</button>
+					  <button type="button" style="width:70px;" class="btn btn-inverse">Dist 5</button>
+					</div>
+				</div>
+			</div>
+			<div class="MIDISetupContainer">
+				<div class="searchfeild">
+					<p>MIDI Setup:</p>
+					<br/>
+					<select id="midiIn"><option>-no MIDI-</option></select>
+					<div id="MIDICheckMessage"></div>
+				</div>
+				<div class="MIDIObjectsContainer">
+					<!-- HOW TO SET UP EACH MIDI CONTROL THINGY -->
+					<div class="MIDIListContainer NextLine Listheader" style="background-color:#000;">
+						<div class="MIDIPlace"><p>Object:</p></div>
+						<div class="MIDIEventName"><p>Function:</p></div>
+						<div class="MIDIAssigned"><p>Assigned to:</p></div>
+						<div class="LearnFunction">MIDI Learn:</div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Volume Fader</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>EQ High</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>EQ Mid</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>EQ Low</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Play/Pause</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Stop</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>set CUE</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning disabled">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Play CUE</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning disabled">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Effect ON/OFF</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck A</p></div>
+						<div class="MIDIEventName"><p>Turntable</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					
+					<!--DeckB -->
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Volume Fader</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>EQ High</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>EQ Mid</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>EQ Low</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Play/Pause</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Stop</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>set CUE</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning disabled">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Play CUE</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning disabled">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Effect ON/OFF</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Deck B</p></div>
+						<div class="MIDIEventName"><p>Turntable</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+				
+					<!--MIXER-->
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Mixer</p></div>
+						<div class="MIDIEventName"><p>Crossfader</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					
+					<!--EFFECTS-->
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Reverb - High Cut</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Reverb - Low Cut</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Reverb - Dry Amount</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Reverb - Wet Amount</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Delay - Feedback</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Delay - Delay time</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Delay - Dry Amount</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Delay - Wet Amount</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Delay - Cutoff</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Chorus - Rate</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Chorus - Delay time</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Chorus - Feedback</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Phaser - Rate</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Phaser - Depth</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Phaser - Feedback</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Phaser - Stereo</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>Phaser - Mod Freq</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="spacer"></div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>LoFi - Gain</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer NextLine">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>LoFi - Drive</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+					<div class="MIDIListContainer">
+						<div class="MIDIPlace"><p>Effects</p></div>
+						<div class="MIDIEventName"><p>LoFi - Curve</p></div>
+						<div class="MIDIAssigned"><p>None</p></div>
+						<div class="LearnFunction"><button type="button" style="width:77px;" class="btn btn-warning">Learn</button></div>
+					</div>
+				</div>
+				<div id="ControlWindow"><p>MIDI CONTROL:</p><div id="ControlValue"></div></div>
+				<div id="CloseMIDISetup">Close <i class="icon-remove icon-white"></i> </div>
+			</div>
+		</div>
+		<a href="https://github.com/AnthonyDry/SoundcloudDj"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+		<script src="js/MIDI.js"></script>
+		<script src="js/AudioProcessing.js"></script>
+		<script src="js/SoundCloudFunctions.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/soundcloudSeach.js"></script>
+		<script type="text/javascript">
+			var Browser = BrowserDetect.browser;
+			if(Browser != "Chrome")
+			{
+				$('body').append("<div class='blurdiv'><p class='blurText'>This Web application requires the newest<br/> version of google Chrome</p><img src='../img/Google-Chrome-icon.png' /></div>");
+				
+			}
+		</script>
+		
+	</body>
+</html>
