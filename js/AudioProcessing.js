@@ -213,6 +213,7 @@
 			//Reverb[1].connect(context.destination);
 			
 			Reverb[1].connect(context.destination);
+		}
 		SetupVolume(val);	
 	}	
 	function AddEffect(val, type){
