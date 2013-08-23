@@ -173,45 +173,46 @@
 		{
 			SourceDeckA = context.createMediaElementSource(sound);
 			
-			EqTrackA[2].connect(Delay[0].input);
-			Delay[0].connect(context.destination);
-			EqTrackA[2].connect(LoFi[0].input);
-			LoFi[0].connect(context.destination);
-			EqTrackA[2].connect(Chorus[0].input);
-			Chorus[0].connect(context.destination);
-			EqTrackA[2].connect(Phaser[0].input);
-			Phaser[0].connect(context.destination);	
-			EqTrackA[2].connect(Reverb[0].input);
-			Reverb[0].connect(context.destination);
-			
 			SourceDeckA.connect(EqTrackA[0].input);
 			EqTrackA[0].connect(context.destination);
 			EqTrackA[0].connect(EqTrackA[1].input);
 			EqTrackA[1].connect(context.destination);
 			EqTrackA[1].connect(EqTrackA[2].input);
-			EqTrackA[2].connect(context.destination);
+			
+			EqTrackA[2].connect(Delay[0].input);
+			//Delay[0].connect(context.destination);
+			Delay[0].connect(LoFi[0].input);
+			//LoFi[0].connect(context.destination);
+			LoFi[0].connect(Chorus[0].input);
+			//Chorus[0].connect(context.destination);
+			Chorus[0].connect(Phaser[0].input);
+			//Phaser[0].connect(context.destination);	
+			Phaser[0].connect(Reverb[0].input);
+			//Reverb[0].connect(context.destination);
+			
+			Reverb[0].connect(context.destination);
 		}
 		if(!val)
 		{
 			SourceDeckB = context.createMediaElementSource(sound);
-			SourceDeckB.connect(Delay[1].input);
-			Delay[1].connect(context.destination);
-			EqTrackB[2].connect(LoFi[1].input);
-			LoFi[1].connect(context.destination);
-			EqTrackB[2].connect(Chorus[1].input);
-			Chorus[1].connect(context.destination);
-			EqTrackB[2].connect(Phaser[1].input);
-			Phaser[1].connect(context.destination);
-			EqTrackB[2].connect(Reverb[1].input);
-			Reverb[1].connect(context.destination);
-			
 			SourceDeckB.connect(EqTrackB[0].input);
 			EqTrackB[0].connect(context.destination);
 			EqTrackB[0].connect(EqTrackB[1].input);
 			EqTrackB[1].connect(context.destination);
 			EqTrackB[1].connect(EqTrackB[2].input);
-			EqTrackB[2].connect(context.destination);
-		}
+			
+			EqTrackB[2].connect(Delay[1].input);
+			//Delay[1].connect(context.destination);
+			Delay[1].connect(LoFi[1].input);
+			//LoFi[1].connect(context.destination);
+			LoFi[1].connect(Chorus[1].input);
+			//Chorus[1].connect(context.destination);
+			Chorus[1].connect(Phaser[1].input);
+			//Phaser[1].connect(context.destination);
+			Phaser[1].connect(Reverb[1].input);
+			//Reverb[1].connect(context.destination);
+			
+			Reverb[1].connect(context.destination);
 		SetupVolume(val);	
 	}	
 	function AddEffect(val, type){
