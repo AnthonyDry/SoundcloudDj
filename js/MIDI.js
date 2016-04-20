@@ -78,7 +78,7 @@ function onMIDIStarted( midi ) {
   midiAccess = midi;
   
   selectMIDI=document.getElementById("midiIn");
-  var list=midiAccess.inputs();
+  var list=midiAccess.inputs;
 
   // clear the MIDI input select
   selectMIDI.options.length = 0;

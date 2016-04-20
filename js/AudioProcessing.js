@@ -173,46 +173,44 @@
 		{
 			SourceDeckA = context.createMediaElementSource(sound);
 			
+			EqTrackA[2].connect(Delay[0].input);
+			Delay[0].connect(context.destination);
+			EqTrackA[2].connect(LoFi[0].input);
+			LoFi[0].connect(context.destination);
+			EqTrackA[2].connect(Chorus[0].input);
+			Chorus[0].connect(context.destination);
+			EqTrackA[2].connect(Phaser[0].input);
+			Phaser[0].connect(context.destination);	
+			EqTrackA[2].connect(Reverb[0].input);
+			Reverb[0].connect(context.destination);
+			
 			SourceDeckA.connect(EqTrackA[0].input);
 			EqTrackA[0].connect(context.destination);
 			EqTrackA[0].connect(EqTrackA[1].input);
 			EqTrackA[1].connect(context.destination);
 			EqTrackA[1].connect(EqTrackA[2].input);
-			
-			EqTrackA[2].connect(Delay[0].input);
-			//Delay[0].connect(context.destination);
-			Delay[0].connect(LoFi[0].input);
-			//LoFi[0].connect(context.destination);
-			LoFi[0].connect(Chorus[0].input);
-			//Chorus[0].connect(context.destination);
-			Chorus[0].connect(Phaser[0].input);
-			//Phaser[0].connect(context.destination);	
-			Phaser[0].connect(Reverb[0].input);
-			//Reverb[0].connect(context.destination);
-			
-			Reverb[0].connect(context.destination);
+			EqTrackA[2].connect(context.destination);
 		}
 		if(!val)
 		{
 			SourceDeckB = context.createMediaElementSource(sound);
+			SourceDeckB.connect(Delay[1].input);
+			Delay[1].connect(context.destination);
+			EqTrackB[2].connect(LoFi[1].input);
+			LoFi[1].connect(context.destination);
+			EqTrackB[2].connect(Chorus[1].input);
+			Chorus[1].connect(context.destination);
+			EqTrackB[2].connect(Phaser[1].input);
+			Phaser[1].connect(context.destination);
+			EqTrackB[2].connect(Reverb[1].input);
+			Reverb[1].connect(context.destination);
+			
 			SourceDeckB.connect(EqTrackB[0].input);
 			EqTrackB[0].connect(context.destination);
 			EqTrackB[0].connect(EqTrackB[1].input);
 			EqTrackB[1].connect(context.destination);
 			EqTrackB[1].connect(EqTrackB[2].input);
-			
-			EqTrackB[2].connect(Delay[1].input);
-			//Delay[1].connect(context.destination);
-			Delay[1].connect(LoFi[1].input);
-			//LoFi[1].connect(context.destination);
-			LoFi[1].connect(Chorus[1].input);
-			//Chorus[1].connect(context.destination);
-			Chorus[1].connect(Phaser[1].input);
-			//Phaser[1].connect(context.destination);
-			Phaser[1].connect(Reverb[1].input);
-			//Reverb[1].connect(context.destination);
-			
-			Reverb[1].connect(context.destination);
+			EqTrackB[2].connect(context.destination);
 		}
 		SetupVolume(val);	
 	}	
@@ -324,9 +322,9 @@
                  bypass: 1
         });
         LoFi[0] = new tuna.Overdrive({
-                    outputGain: 1,         //0 to 1+
+                    outputGain: 0.5,         //0 to 1+
                     drive: 0.8,              //0 to 1
-                    curveAmount: 1,          //0 to 1
+                    curveAmount: 0.7,          //0 to 1
                     algorithmIndex: 0,       //0 to 5, selects one of our drive algorithms
                     bypass: 1
         });
@@ -365,7 +363,7 @@
 		                 Q: 100,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                             //0 to 1+
-		                 filterType: 3,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'lowshelf',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 		EqTrackB[0] = new tuna.Filter({
@@ -373,7 +371,7 @@
 		                 Q: 1,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                            //0 to 1+
-		                 filterType: 3,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'lowshelf',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 		//MID EQ
@@ -382,7 +380,7 @@
 		                 Q: 20,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                             //0 to 1+
-		                 filterType: 5,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'peaking',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 		EqTrackB[1] = new tuna.Filter({
@@ -390,7 +388,7 @@
 		                 Q: 20,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                 bypass: 1,             //0 to 1+
-		                 filterType: 5,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'peaking',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 		//HIGH EQ
@@ -399,7 +397,7 @@
 		                 Q: 1,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                              //0 to 1+
-		                 filterType: 4,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'highshelf',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 		EqTrackB[2] = new tuna.Filter({
@@ -407,7 +405,7 @@
 		                 Q: 1,                  //0.001 to 100
 		                 gain: 0,               //-40 to 40
 		                              //0 to 1+
-		                 filterType: 4,         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
+		                 filterType: 'highshelf',         //0 to 7, corresponds to the filter types in the native filter node: lowpass, highpass, bandpass, lowshelf, highshelf, peaking, notch, allpass in that order
 		                 bypass: 0
 		             });
 	}
@@ -477,6 +475,7 @@
 				EqTrackA[2].disconnect();
 				THE_SONG_OBJECT_OF_TRACKA = new Audio();
 				THE_SONG_OBJECT_OF_TRACKA.src = url;
+				THE_SONG_OBJECT_OF_TRACKA.crossOrigin = "anonymous";
 				Reverb[0].disconnect();
 				THE_SONG_OBJECT_OF_TRACKA.addEventListener("canplaythrough", function()
 				{
@@ -505,6 +504,7 @@
 			{
 				THE_SONG_OBJECT_OF_TRACKA = new Audio();
 				THE_SONG_OBJECT_OF_TRACKA.src = url;
+				THE_SONG_OBJECT_OF_TRACKA.crossOrigin = "anonymous";
 				THE_SONG_OBJECT_OF_TRACKA.addEventListener("canplaythrough", function()
 				{
 					SetupAudio(true, THE_SONG_OBJECT_OF_TRACKA);
@@ -549,6 +549,7 @@
 				EqTrackB[2].disconnect();
 				THE_SONG_OBJECT_OF_TRACKB = new Audio();
 				THE_SONG_OBJECT_OF_TRACKB.src = url;
+				THE_SONG_OBJECT_OF_TRACKB.crossOrigin = "anonymous";
 				Reverb[1].disconnect();
 				THE_SONG_OBJECT_OF_TRACKB.addEventListener("canplaythrough", function()
 				{
@@ -579,6 +580,7 @@
 			{
 				THE_SONG_OBJECT_OF_TRACKB = new Audio();
 				THE_SONG_OBJECT_OF_TRACKB.src = url;
+				THE_SONG_OBJECT_OF_TRACKB.crossOrigin = "anonymous";
 				//THE_SONG_OBJECT_OF_TRACKB.volume = volume;
 				$( "#sliderC" ).trigger("drag");
 				THE_SONG_OBJECT_OF_TRACKB.addEventListener("canplaythrough", function()

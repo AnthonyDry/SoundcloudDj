@@ -70,6 +70,8 @@
 				DURATION_TRACKB = null;
 				THE_SONG_OBJECT_OF_TRACKA = new Audio();
 				THE_SONG_OBJECT_OF_TRACKB = new Audio();
+				THE_SONG_OBJECT_OF_TRACKA.crossOrigin = "anonymous";
+				THE_SONG_OBJECT_OF_TRACKB.crossOrigin = "anonymous";
 
 				VOLYM_REFERENCE_TRACK_A = 1;
 				VOLYM_REFERENCE_TRACK_B = 1;
@@ -77,7 +79,7 @@
 				//SC2.initialize({client_id: MY_CLIENTID,});
 			    waveform1 = new Waveform({container: document.getElementById("trackA"),});
 				waveform2 = new Waveform({container: document.getElementById("trackB"),});
-				LoadASong(true, "https://soundcloud.com/aleksander-vinter/savant-storm-the-gates");
+				LoadASong(true, "https://soundcloud.com/anthonydry/level2-megamanclone");
 				setTimeout(function(){LoadASong(false, "https://soundcloud.com/earmilk/kimbra-settle-down-death-by-3")},1500);
 				
 				
