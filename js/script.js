@@ -79,8 +79,8 @@
 				//SC2.initialize({client_id: MY_CLIENTID,});
 			    waveform1 = new Waveform({container: document.getElementById("trackA"),});
 				waveform2 = new Waveform({container: document.getElementById("trackB"),});
-				LoadASong(true, "https://soundcloud.com/anthonydry/level2-megamanclone");
-				setTimeout(function(){LoadASong(false, "https://soundcloud.com/earmilk/kimbra-settle-down-death-by-3")},1500);
+				LoadASong(true, "http://soundcloud.com/anthonydry/level2-megamanclone");
+				setTimeout(function(){LoadASong(false, "http://soundcloud.com/earmilk/kimbra-settle-down-death-by-3")},1500);
 				
 				
 				
