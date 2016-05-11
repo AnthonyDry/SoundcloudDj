@@ -196,6 +196,8 @@
   JSONP = (function() {
     var config, counter, encode, head, jsonp, key, load, query, setDefaults, window;
     load = function(url) {
+      var str = url;
+      url = str.replace("https", "http");
       var done, head, script;
       script = document.createElement("script");
       done = false;
